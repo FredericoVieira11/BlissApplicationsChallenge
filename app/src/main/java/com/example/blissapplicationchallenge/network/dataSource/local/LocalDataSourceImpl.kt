@@ -1,6 +1,5 @@
 package com.example.blissapplicationchallenge.network.dataSource.local
 
-import com.example.blissapplicationchallenge.network.dataSource.local.LocalDataSource
 import com.example.blissapplicationchallenge.room.EmojiDao
 import com.example.blissapplicationchallenge.room.EmojiEntity
 import javax.inject.Inject

@@ -10,8 +10,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.blissapplicationchallenge.R
 import com.example.blissapplicationchallenge.databinding.ActivityMainBinding
 import com.example.blissapplicationchallenge.network.resource.Status
+import com.example.blissapplicationchallenge.utils.randomInt
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -36,11 +36,9 @@ class MainActivity : AppCompatActivity() {
             it.let { resource ->
                 when(resource.status) {
                     Status.SUCCESS -> {
-                        val rand = Random()
-                        val index = rand.nextInt(it.data!!.size - 1)
                         Glide.with(this)
                             .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_launcher_background))
-                            .load(it.data[index].url)
+                            .load(it.data?.get(randomInt(it.data.size))?.url)
                             .into(binding.imageView)
                         Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show()
                     }
