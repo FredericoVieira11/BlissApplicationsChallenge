@@ -1,4 +1,4 @@
-package com.example.blissapplicationchallenge.ui
+package com.example.blissapplicationchallenge.ui.emojiList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -10,9 +10,9 @@ import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class EmojiListViewModel @Inject constructor(
     private val repository: EmojisRepository
-): ViewModel() {
+): ViewModel(){
 
     fun getEmojis() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
@@ -22,6 +22,5 @@ class MainViewModel @Inject constructor(
             emit(Resource.error(data = null, message = e.message ?: "Error Occurred"))
         }
     }
-
 
 }

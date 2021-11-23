@@ -9,10 +9,10 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class RandomEmojisRepositoryImpl @Inject constructor(
+class EmojisRepositoryImpl @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
-): RandomEmojisRepository{
+): EmojisRepository{
 
     override suspend fun getEmojis(): List<EmojiModel> {
         return if (this.localDataSource.getList().isEmpty()) {

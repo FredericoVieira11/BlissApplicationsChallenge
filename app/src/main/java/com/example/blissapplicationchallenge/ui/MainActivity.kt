@@ -1,5 +1,6 @@
 package com.example.blissapplicationchallenge.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -10,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.blissapplicationchallenge.R
 import com.example.blissapplicationchallenge.databinding.ActivityMainBinding
 import com.example.blissapplicationchallenge.network.resource.Status
+import com.example.blissapplicationchallenge.ui.emojiList.EmojiListActivity
 import com.example.blissapplicationchallenge.utils.randomInt
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,6 +31,11 @@ class MainActivity : AppCompatActivity() {
 
     fun onGetRandomEmoji() {
         getRandomEmoji()
+    }
+
+    fun navToEmojiListActivity() {
+        val intent = Intent(this, EmojiListActivity::class.java)
+        startActivity(intent)
     }
 
     private fun getRandomEmoji() {

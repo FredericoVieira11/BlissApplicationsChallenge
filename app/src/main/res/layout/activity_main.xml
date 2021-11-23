@@ -41,5 +41,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="106dp" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="EmojiList"
+            android:onClick="@{() -> function.navToEmojiListActivity()}"
+            app:layout_constraintEnd_toEndOf="@+id/button"
+            app:layout_constraintStart_toStartOf="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -4,8 +4,8 @@ import com.example.blissapplicationchallenge.network.dataSource.local.LocalDataS
 import com.example.blissapplicationchallenge.network.dataSource.local.LocalDataSourceImpl
 import com.example.blissapplicationchallenge.network.dataSource.remote.RemoteDataSource
 import com.example.blissapplicationchallenge.network.dataSource.remote.RemoteDataSourceImpl
-import com.example.blissapplicationchallenge.network.repository.RandomEmojisRepository
-import com.example.blissapplicationchallenge.network.repository.RandomEmojisRepositoryImpl
+import com.example.blissapplicationchallenge.network.repository.EmojisRepository
+import com.example.blissapplicationchallenge.network.repository.EmojisRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,7 +16,7 @@ import dagger.hilt.components.SingletonComponent
 abstract class AppModuleBinds {
 
     @Binds
-    abstract fun bindRandomEmojisRepository(repository: RandomEmojisRepositoryImpl): RandomEmojisRepository
+    abstract fun bindRandomEmojisRepository(repository: EmojisRepositoryImpl): EmojisRepository
 
     @Binds
     abstract fun bindLocalDataSource(localDataSourceImpl: LocalDataSourceImpl): LocalDataSource
