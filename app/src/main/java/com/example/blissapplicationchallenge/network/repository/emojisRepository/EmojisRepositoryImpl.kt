@@ -1,4 +1,4 @@
-package com.example.blissapplicationchallenge.network.repository
+package com.example.blissapplicationchallenge.network.repository.emojisRepository
 
 import com.example.blissapplicationchallenge.network.dataSource.local.LocalDataSource
 import com.example.blissapplicationchallenge.network.dataSource.remote.RemoteDataSource

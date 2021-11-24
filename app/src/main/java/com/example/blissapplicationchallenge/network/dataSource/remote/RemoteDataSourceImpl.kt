@@ -1,7 +1,9 @@
 package com.example.blissapplicationchallenge.network.dataSource.remote
 
 import com.example.blissapplicationchallenge.network.ApiService
+import com.example.blissapplicationchallenge.network.response.AvatarResponse
 import com.example.blissapplicationchallenge.network.response.EmojiResponse
+import retrofit2.Response
 import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(
@@ -14,5 +16,10 @@ class RemoteDataSourceImpl @Inject constructor(
             EmojiResponse(it.key, it.value)
         }.toList()
     }
+
+    override suspend fun getAvatar(
+        avatar: String
+    ): Response<AvatarResponse> = this.apiService.getAvatar(username = avatar)
+
 
 }
