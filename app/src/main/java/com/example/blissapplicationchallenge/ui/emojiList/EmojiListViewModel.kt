@@ -2,7 +2,7 @@ package com.example.blissapplicationchallenge.ui.emojiList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.example.blissapplicationchallenge.network.repository.EmojisRepository
+import com.example.blissapplicationchallenge.network.repository.emojisRepository.EmojisRepository
 import com.example.blissapplicationchallenge.network.resource.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

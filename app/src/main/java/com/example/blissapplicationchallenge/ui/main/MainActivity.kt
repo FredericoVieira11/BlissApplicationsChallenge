@@ -1,4 +1,4 @@
-package com.example.blissapplicationchallenge.ui
+package com.example.blissapplicationchallenge.ui.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -38,6 +38,14 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun onSearchAvatar() {
+        if (this.binding.editTextTextPersonName.text.isNullOrBlank()) {
+            return
+        }
+
+        getAvatar(this.binding.editTextTextPersonName.text.toString())
+    }
+
     private fun getRandomEmoji() {
         viewModel.getEmojis().observe(this, {
             it.let { resource ->
@@ -46,6 +54,28 @@ class MainActivity : AppCompatActivity() {
                         Glide.with(this)
                             .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_launcher_background))
                             .load(it.data?.get(randomInt(it.data.size))?.url)
+                            .into(binding.imageView)
+                        Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show()
+                    }
+                    Status.ERROR -> {
+                        Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show()
+                    }
+                    Status.LOADING -> {
+                        Toast.makeText(this, "LOADING", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        })
+    }
+
+    private fun getAvatar(avatar: String) {
+        this.viewModel.getAvatar(avatar).observe(this, {
+            it.let { resource ->
+                when(resource.status) {
+                    Status.SUCCESS -> {
+                        Glide.with(this)
+                            .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_launcher_background))
+                            .load(it.data?.avatarUrl)
                             .into(binding.imageView)
                         Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show()
                     }
