@@ -6,5 +6,8 @@ import retrofit2.Response
 
 interface AvatarRepository {
     suspend fun getAvatar(avatar: String): AvatarModel
+
     fun getAvatarList(): List<AvatarModel>
+
+    fun deleteAvatar(avatar: AvatarModel)
 }
