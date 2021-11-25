@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BlissApplicationChallenge">
         <activity
+            android:name=".ui.avatarList.AvatarListActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.emojiList.EmojiListActivity"
             android:exported="false" />
         <activity

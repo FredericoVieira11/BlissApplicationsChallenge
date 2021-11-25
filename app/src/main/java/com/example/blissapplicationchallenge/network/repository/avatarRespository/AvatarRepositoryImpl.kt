@@ -14,6 +14,7 @@ class AvatarRepositoryImpl @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ): AvatarRepository {
+
     override suspend fun getAvatar(avatar: String): AvatarModel {
         val test = this.remoteDataSource.getAvatar(avatar = avatar)
         saveData(avatar)
@@ -41,6 +42,15 @@ class AvatarRepositoryImpl @Inject constructor(
                 it.avatarUrl!!
             )
         }.toList()
+    }
+
+    override fun deleteAvatar(avatar: AvatarModel) {
+        val avatarEntity = AvatarEntity(
+            avatar.login,
+            avatar.id,
+            avatar.avatarUrl
+        )
+        this.localDataSource.deleteAvatar(avatarEntity)
     }
 
 }

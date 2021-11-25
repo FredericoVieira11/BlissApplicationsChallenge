@@ -11,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.blissapplicationchallenge.R
 import com.example.blissapplicationchallenge.databinding.ActivityMainBinding
 import com.example.blissapplicationchallenge.network.resource.Status
+import com.example.blissapplicationchallenge.ui.avatarList.AvatarListActivity
 import com.example.blissapplicationchallenge.ui.emojiList.EmojiListActivity
 import com.example.blissapplicationchallenge.utils.randomInt
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +36,11 @@ class MainActivity : AppCompatActivity() {
 
     fun navToEmojiListActivity() {
         val intent = Intent(this, EmojiListActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun navToAvatarListActivity() {
+        val intent = Intent(this, AvatarListActivity::class.java)
         startActivity(intent)
     }
 

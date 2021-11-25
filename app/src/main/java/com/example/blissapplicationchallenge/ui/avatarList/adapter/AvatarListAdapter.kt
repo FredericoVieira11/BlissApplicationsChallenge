@@ -1,4 +1,4 @@
-package com.example.blissapplicationchallenge.ui.emojiList.adapter
+package com.example.blissapplicationchallenge.ui.avatarList.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,27 +10,28 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.blissapplicationchallenge.R
 import com.example.blissapplicationchallenge.databinding.ItemListBinding
 import com.example.blissapplicationchallenge.network.model.AvatarModel
-import com.example.blissapplicationchallenge.network.model.EmojiModel
 
-class EmojiListAdapter(
-    private val list: MutableList<EmojiModel>,
-    private val context: Context
+class AvatarListAdapter(
+    private val list: MutableList<AvatarModel>,
+    private val context: Context,
+    private val listener: IAvatarAdapterListener
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return EmojisListViewHolder(
+        return AvatarListViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder) {
-            is EmojisListViewHolder -> {
+            is AvatarListViewHolder -> {
                 holder.bind(list[position], context)
             }
         }
 
         holder.itemView.setOnClickListener {
+            this.listener.onDeleteAvatar(this.list[position])
             val newPosition: Int = holder.adapterPosition
             list.removeAt(newPosition)
             notifyItemRemoved(newPosition)
@@ -39,20 +40,20 @@ class EmojiListAdapter(
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return this.list.size
     }
 
 }
 
-class EmojisListViewHolder constructor(itemView: View): RecyclerView.ViewHolder(itemView) {
+class AvatarListViewHolder constructor(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     private val binding = ItemListBinding.bind(itemView)
 
-    fun bind(emojiModel: EmojiModel, context: Context) {
+    fun bind(avatarModel: AvatarModel, context: Context) {
         Glide.with(context)
             .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_launcher_background))
-            .load(emojiModel.url)
+            .load(avatarModel.avatarUrl)
             .into(binding.itemImage)
-
     }
+
 }
