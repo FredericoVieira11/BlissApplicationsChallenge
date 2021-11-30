@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.blissapplicationchallenge.R
 import com.example.blissapplicationchallenge.databinding.ItemListBinding
-import com.example.blissapplicationchallenge.network.model.AvatarModel
 import com.example.blissapplicationchallenge.network.model.EmojiModel
 
 class EmojiListAdapter(
@@ -28,14 +27,14 @@ class EmojiListAdapter(
 
         holder.itemView.setOnClickListener {
             val newPosition: Int = holder.adapterPosition
-            list.removeAt(newPosition)
+            this.list.removeAt(newPosition)
             notifyItemRemoved(newPosition)
-            notifyItemRangeChanged(newPosition, list.size)
+            notifyItemRangeChanged(newPosition, this.list.size)
         }
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return this.list.size
     }
 
     fun clearData() {
@@ -52,7 +51,7 @@ class EmojisListViewHolder constructor(itemView: View): RecyclerView.ViewHolder(
         Glide.with(context)
             .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_launcher_background))
             .load(emojiModel.url)
-            .into(binding.itemImage)
+            .into(this.binding.itemImage)
 
     }
 }

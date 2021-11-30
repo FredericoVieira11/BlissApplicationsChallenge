@@ -11,11 +11,11 @@ import com.example.blissapplicationchallenge.databinding.ActivityAvatarListBindi
 import com.example.blissapplicationchallenge.network.model.AvatarModel
 import com.example.blissapplicationchallenge.network.resource.Status
 import com.example.blissapplicationchallenge.ui.avatarList.adapter.AvatarListAdapter
-import com.example.blissapplicationchallenge.ui.avatarList.adapter.IAvatarAdapterListener
+import com.example.blissapplicationchallenge.ui.avatarList.adapter.AvatarAdapterListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AvatarListActivity : AppCompatActivity(), IAvatarAdapterListener {
+class AvatarListActivity : AppCompatActivity(), AvatarAdapterListener {
 
     private lateinit var binding: ActivityAvatarListBinding
     private lateinit var viewModel: AvatarListViewModel
@@ -34,14 +34,10 @@ class AvatarListActivity : AppCompatActivity(), IAvatarAdapterListener {
                 when(resource.status) {
                     Status.SUCCESS -> {
                         setupRv(it.data!!)
-                        Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show()
                     }
                     Status.ERROR -> {
-                        Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show()
-                    }
-                    Status.LOADING -> {
-                        Toast.makeText(this, "LOADING", Toast.LENGTH_SHORT).show()
-                    }
+                        Toast.makeText(this, this.getString(R.string.error_message), Toast.LENGTH_SHORT).show()                    }
+                    Status.LOADING -> {}
                 }
             }
         })
@@ -52,15 +48,11 @@ class AvatarListActivity : AppCompatActivity(), IAvatarAdapterListener {
             it.let { resource ->
                 when(resource.status) {
                     Status.SUCCESS -> {
-                        Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show()
-                    }
+                        Toast.makeText(this, this.getString(R.string.success_message), Toast.LENGTH_SHORT).show()                    }
                     Status.ERROR -> {
-                        Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show()
-                        return@observe
+                        Toast.makeText(this, this.getString(R.string.error_message), Toast.LENGTH_SHORT).show()
                     }
-                    Status.LOADING -> {
-                        Toast.makeText(this, "LOADING", Toast.LENGTH_SHORT).show()
-                    }
+                    Status.LOADING -> {}
                 }
             }
         })

@@ -3,7 +3,6 @@ package com.example.blissapplicationchallenge.network.repository.avatarResposito
 import com.example.blissapplicationchallenge.network.dataSource.local.LocalDataSource
 import com.example.blissapplicationchallenge.network.dataSource.remote.RemoteDataSource
 import com.example.blissapplicationchallenge.network.model.AvatarModel
-import com.example.blissapplicationchallenge.network.response.AvatarResponse
 import com.example.blissapplicationchallenge.room.AvatarEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -15,10 +14,16 @@ class AvatarRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ): AvatarRepository {
 
-    override suspend fun getAvatar(avatar: String): AvatarModel {
-        val test = this.remoteDataSource.getAvatar(avatar = avatar)
+    override suspend fun getAvatar(avatar: String): AvatarModel? {
+        val avatarResponse = this.remoteDataSource.getAvatar(avatar = avatar)
         saveData(avatar)
-        return AvatarModel(test.body()!!.login, test.body()!!.id, test.body()!!.avatarUrl)
+        return avatarResponse.body()?.let {
+            AvatarModel(
+                it.login,
+                it.id,
+                it.avatarUrl
+            )
+        }
     }
 
     private suspend fun saveData(avatar: String) = withContext(Dispatchers.IO) {

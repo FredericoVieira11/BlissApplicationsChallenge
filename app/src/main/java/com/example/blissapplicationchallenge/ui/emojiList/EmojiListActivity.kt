@@ -2,6 +2,7 @@ package com.example.blissapplicationchallenge.ui.emojiList
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -37,6 +38,7 @@ class EmojiListActivity : AppCompatActivity() {
             it.let { resource ->
                 when(resource.status) {
                     Status.SUCCESS -> {
+                        hideProgressBar()
                         if (this.viewModel.getIsToReloadData()) {
                             this.adapter.clearData()
                             this.viewModel.setIsToReloadData(false)
@@ -48,13 +50,12 @@ class EmojiListActivity : AppCompatActivity() {
                                 setupRv(data)
                             }
                         }
-                        Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show()
                     }
                     Status.ERROR -> {
-                        Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show()
-                    }
+                        hideProgressBar()
+                        Toast.makeText(this, this.getString(R.string.error_message), Toast.LENGTH_SHORT).show()                    }
                     Status.LOADING -> {
-                        Toast.makeText(this, "LOADING", Toast.LENGTH_SHORT).show()
+                        showProgressBar()
                     }
                 }
             }
@@ -65,6 +66,14 @@ class EmojiListActivity : AppCompatActivity() {
         this.binding.rvEmoji.layoutManager = GridLayoutManager(this, 4)
         this.adapter = EmojiListAdapter(data as MutableList<EmojiModel>, this)
         this.binding.rvEmoji.adapter = this.adapter
+    }
+
+    private fun showProgressBar() {
+        this.binding.progressBarEmojiList.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        this.binding.progressBarEmojiList.visibility = View.GONE
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.blissapplicationchallenge.ui.googleRepos
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -32,14 +33,15 @@ class GoogleReposActivity : AppCompatActivity() {
             it.let { resource ->
                 when(resource.status) {
                     Status.SUCCESS -> {
+                        hideProgressBar()
                         setupRv(it.data!!)
-                        Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show()
                     }
                     Status.ERROR -> {
-                        Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show()
+                        hideProgressBar()
+                        Toast.makeText(this, this.getString(R.string.error_message), Toast.LENGTH_SHORT).show()
                     }
                     Status.LOADING -> {
-                        Toast.makeText(this, "LOADING", Toast.LENGTH_SHORT).show()
+                        showProgressBar()
                     }
                 }
             }
@@ -51,5 +53,14 @@ class GoogleReposActivity : AppCompatActivity() {
         this.adapter = GoogleReposAdapter(data)
         this.binding.rvGoogleRepos.adapter = this.adapter
     }
+
+    private fun showProgressBar() {
+        this.binding.progressBarGoogleRepos.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        this.binding.progressBarGoogleRepos.visibility = View.GONE
+    }
+
 
 }
