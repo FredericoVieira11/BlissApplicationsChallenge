@@ -1,4 +1,4 @@
-package com.example.blissapplicationchallenge.network.repository
+package com.example.blissapplicationchallenge.network.repository.emojisRepository
 
 import com.example.blissapplicationchallenge.network.dataSource.local.LocalDataSource
 import com.example.blissapplicationchallenge.network.dataSource.remote.RemoteDataSource
@@ -9,10 +9,10 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class RandomEmojisRepositoryImpl @Inject constructor(
+class EmojisRepositoryImpl @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
-): RandomEmojisRepository{
+): EmojisRepository{
 
     override suspend fun getEmojis(): List<EmojiModel> {
         return if (this.localDataSource.getList().isEmpty()) {
@@ -26,9 +26,9 @@ class RandomEmojisRepositoryImpl @Inject constructor(
     private suspend fun saveData() = withContext(Dispatchers.IO) {
         async {
             val list = remoteDataSource.getEmojis()
-            val emojiEntity = list.map {
+            val emojiEntity = list?.map {
                 EmojiEntity(id = null, name = it.name, url = it.url)
-            }.toList()
+            }?.toList()
             localDataSource.setEmojiList(emojiEntity)
         }
     }.await()

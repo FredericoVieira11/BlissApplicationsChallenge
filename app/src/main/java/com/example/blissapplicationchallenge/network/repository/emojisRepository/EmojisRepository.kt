@@ -1,7 +1,7 @@
-package com.example.blissapplicationchallenge.network.repository
+package com.example.blissapplicationchallenge.network.repository.emojisRepository
 
 import com.example.blissapplicationchallenge.network.model.EmojiModel
 
-interface RandomEmojisRepository {
+interface EmojisRepository {
     suspend fun getEmojis(): List<EmojiModel>
 }
