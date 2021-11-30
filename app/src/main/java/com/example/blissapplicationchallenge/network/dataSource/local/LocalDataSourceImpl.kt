@@ -9,7 +9,7 @@ class LocalDataSourceImpl @Inject constructor(
     private val dataBaseDao: DataBaseDao
 ): LocalDataSource {
     override fun getList(): List<EmojiEntity> = this.dataBaseDao.getEmojiList()
-    override suspend fun setEmojiList(emojiList: List<EmojiEntity>) = this.dataBaseDao.setEmojiList(emojiEntityList = emojiList)
+    override suspend fun setEmojiList(emojiList: List<EmojiEntity>?) = this.dataBaseDao.setEmojiList(emojiEntityList = emojiList)
 
     override fun getAvatarList(): List<AvatarEntity> = this.dataBaseDao.getAvatarList()
     override suspend fun setAvatar(avatarEntity: AvatarEntity) = this.dataBaseDao.setAvatar(avatarEntity)

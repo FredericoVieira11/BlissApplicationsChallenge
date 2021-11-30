@@ -26,9 +26,9 @@ class EmojisRepositoryImpl @Inject constructor(
     private suspend fun saveData() = withContext(Dispatchers.IO) {
         async {
             val list = remoteDataSource.getEmojis()
-            val emojiEntity = list.map {
+            val emojiEntity = list?.map {
                 EmojiEntity(id = null, name = it.name, url = it.url)
-            }.toList()
+            }?.toList()
             localDataSource.setEmojiList(emojiEntity)
         }
     }.await()

@@ -2,6 +2,6 @@ package com.example.blissapplicationchallenge.ui.avatarList.adapter
 
 import com.example.blissapplicationchallenge.network.model.AvatarModel
 
-interface IAvatarAdapterListener {
+interface AvatarAdapterListener {
     fun onDeleteAvatar(avatar: AvatarModel)
 }

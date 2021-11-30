@@ -14,7 +14,7 @@ import com.example.blissapplicationchallenge.network.model.AvatarModel
 class AvatarListAdapter(
     private val list: MutableList<AvatarModel>,
     private val context: Context,
-    private val listener: IAvatarAdapterListener
+    private val listener: AvatarAdapterListener
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -24,18 +24,14 @@ class AvatarListAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder) {
-            is AvatarListViewHolder -> {
-                holder.bind(list[position], context)
-            }
-        }
+        (holder as AvatarListViewHolder).bind(this.list[position], this.context)
 
         holder.itemView.setOnClickListener {
             this.listener.onDeleteAvatar(this.list[position])
             val newPosition: Int = holder.adapterPosition
-            list.removeAt(newPosition)
+            this.list.removeAt(newPosition)
             notifyItemRemoved(newPosition)
-            notifyItemRangeChanged(newPosition, list.size)
+            notifyItemRangeChanged(newPosition, this.list.size)
         }
     }
 
@@ -53,7 +49,7 @@ class AvatarListViewHolder constructor(itemView: View): RecyclerView.ViewHolder(
         Glide.with(context)
             .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_launcher_background))
             .load(avatarModel.avatarUrl)
-            .into(binding.itemImage)
+            .into(this.binding.itemImage)
     }
 
 }

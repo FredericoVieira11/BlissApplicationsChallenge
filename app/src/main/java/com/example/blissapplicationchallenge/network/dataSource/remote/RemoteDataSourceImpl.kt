@@ -11,11 +11,11 @@ class RemoteDataSourceImpl @Inject constructor(
     private val apiService: ApiService
 ): RemoteDataSource {
 
-    override suspend fun getEmojis(): List<EmojiResponse> {
+    override suspend fun getEmojis(): List<EmojiResponse>? {
         val test = apiService.getEmojis()
-        return test.map {
+        return test.body()?.map {
             EmojiResponse(it.key, it.value)
-        }.toList()
+        }?.toList()
     }
 
     override suspend fun getAvatar(

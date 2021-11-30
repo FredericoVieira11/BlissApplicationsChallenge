@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">BlissApplicationChallenge</string>
+    <string name="google_repos">Google Repos</string>
+    <string name="avatar_list">Avatar List</string>
+    <string name="name">Name</string>
+    <string name="emoji_list">Emoji List</string>
+    <string name="random_emoji">Random Emoji</string>
+    <string name="error_message">Something Failed</string>
+    <string name="success_message">Success</string>
 </resources>
