@@ -24,11 +24,7 @@ class EmojiListAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder) {
-            is EmojisListViewHolder -> {
-                holder.bind(list[position], context)
-            }
-        }
+        (holder as EmojisListViewHolder).bind(this.list[position], this.context)
 
         holder.itemView.setOnClickListener {
             val newPosition: Int = holder.adapterPosition
@@ -40,6 +36,10 @@ class EmojiListAdapter(
 
     override fun getItemCount(): Int {
         return list.size
+    }
+
+    fun clearData() {
+        this.list.clear()
     }
 
 }
