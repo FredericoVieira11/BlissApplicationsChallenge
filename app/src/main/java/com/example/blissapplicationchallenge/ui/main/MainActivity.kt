@@ -13,6 +13,7 @@ import com.example.blissapplicationchallenge.databinding.ActivityMainBinding
 import com.example.blissapplicationchallenge.network.resource.Status
 import com.example.blissapplicationchallenge.ui.avatarList.AvatarListActivity
 import com.example.blissapplicationchallenge.ui.emojiList.EmojiListActivity
+import com.example.blissapplicationchallenge.ui.googleRepos.GoogleReposActivity
 import com.example.blissapplicationchallenge.utils.randomInt
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,6 +42,11 @@ class MainActivity : AppCompatActivity() {
 
     fun navToAvatarListActivity() {
         val intent = Intent(this, AvatarListActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun navToGoogleReposActivity() {
+        val intent = Intent(this, GoogleReposActivity::class.java)
         startActivity(intent)
     }
 

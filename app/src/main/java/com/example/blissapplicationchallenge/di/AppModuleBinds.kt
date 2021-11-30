@@ -8,6 +8,8 @@ import com.example.blissapplicationchallenge.network.repository.emojisRepository
 import com.example.blissapplicationchallenge.network.repository.emojisRepository.EmojisRepository
 import com.example.blissapplicationchallenge.network.repository.avatarRespository.AvatarRepository
 import com.example.blissapplicationchallenge.network.repository.avatarRespository.AvatarRepositoryImpl
+import com.example.blissapplicationchallenge.network.repository.googleReposRepository.GoogleReposRepository
+import com.example.blissapplicationchallenge.network.repository.googleReposRepository.GoogleReposRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -28,4 +30,7 @@ abstract class AppModuleBinds {
 
     @Binds
     abstract fun bindAvatarRepository(repository: AvatarRepositoryImpl): AvatarRepository
+
+    @Binds
+    abstract fun bindGoogleReposRepository(repository: GoogleReposRepositoryImpl): GoogleReposRepository
 }
