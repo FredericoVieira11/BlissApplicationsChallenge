@@ -3,6 +3,7 @@ package com.example.blissapplicationchallenge.network.dataSource.remote
 import com.example.blissapplicationchallenge.network.ApiService
 import com.example.blissapplicationchallenge.network.response.AvatarResponse
 import com.example.blissapplicationchallenge.network.response.EmojiResponse
+import com.example.blissapplicationchallenge.network.response.GoogleRepoResponse
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -20,6 +21,12 @@ class RemoteDataSourceImpl @Inject constructor(
     override suspend fun getAvatar(
         avatar: String
     ): Response<AvatarResponse> = this.apiService.getAvatar(username = avatar)
+
+    override suspend fun getGoogleRepos(
+        username: String,
+        page: Int,
+        size: Int
+    ): Response<List<GoogleRepoResponse>> = this.apiService.getGoogleRepos(username, page, size)
 
 
 }
