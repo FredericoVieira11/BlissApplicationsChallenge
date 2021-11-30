@@ -1,5 +1,6 @@
 package com.example.blissapplicationchallenge.ui.emojiList
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.blissapplicationchallenge.network.repository.emojisRepository.EmojisRepository
@@ -14,6 +15,12 @@ class EmojiListViewModel @Inject constructor(
     private val repository: EmojisRepository
 ): ViewModel(){
 
+    private val isToReloadDta = MutableLiveData<Boolean>()
+
+    init {
+        this.isToReloadDta.value = false
+    }
+
     fun getEmojis() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
@@ -22,5 +29,11 @@ class EmojiListViewModel @Inject constructor(
             emit(Resource.error(data = null, message = e.message ?: "Error Occurred"))
         }
     }
+
+    fun setIsToReloadData(isToReloadData: Boolean) {
+        this.isToReloadDta.value = isToReloadData
+    }
+
+    fun getIsToReloadData(): Boolean = this.isToReloadDta.value!!
 
 }

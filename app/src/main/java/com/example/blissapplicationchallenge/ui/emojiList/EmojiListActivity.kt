@@ -26,7 +26,9 @@ class EmojiListActivity : AppCompatActivity() {
         this.viewModel = ViewModelProvider(this)[EmojiListViewModel::class.java]
         getEmojis()
         this.binding.swipeToRefresh.setOnRefreshListener {
-            //TODO: refreshing data
+            this.viewModel.setIsToReloadData(true)
+            getEmojis()
+            this.binding.swipeToRefresh.isRefreshing = false
         }
     }
 
@@ -35,9 +37,17 @@ class EmojiListActivity : AppCompatActivity() {
             it.let { resource ->
                 when(resource.status) {
                     Status.SUCCESS -> {
-                        this.binding.rvEmoji.layoutManager = GridLayoutManager(this, 4)
-                        this.adapter = EmojiListAdapter(it.data as MutableList<EmojiModel>, this)
-                        this.binding.rvEmoji.adapter = this.adapter
+                        if (this.viewModel.getIsToReloadData()) {
+                            this.adapter.clearData()
+                            this.viewModel.setIsToReloadData(false)
+                            it.data?.let { data ->
+                                setupRv(data)
+                            }
+                        } else {
+                            it.data?.let { data ->
+                                setupRv(data)
+                            }
+                        }
                         Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show()
                     }
                     Status.ERROR -> {
@@ -49,6 +59,12 @@ class EmojiListActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun setupRv(data: List<EmojiModel>) {
+        this.binding.rvEmoji.layoutManager = GridLayoutManager(this, 4)
+        this.adapter = EmojiListAdapter(data as MutableList<EmojiModel>, this)
+        this.binding.rvEmoji.adapter = this.adapter
     }
 
 }
